@@ -1,0 +1,23 @@
+﻿<Window x:Class="Students_group.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Students_group"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
+    <Grid>
+        <Button x:Name="AddButt" Content="show" HorizontalAlignment="Left" Height="45" Margin="642,364,0,0" VerticalAlignment="Top" Width="140" Click="AddButt_Click"/>
+        <DataGrid Name="RecordsDataGrid" Margin="10,10,0,19" AutoGenerateColumns="True" HorizontalContentAlignment="Stretch" CanUserResizeColumns="False" HorizontalAlignment="Left" Width="290">
+            
+        </DataGrid>
+        <TextBox x:Name="NameBox" HorizontalAlignment="Left" Height="25" Margin="490,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="277"/>
+        <Button x:Name="AddStudent" Content="Add" HorizontalAlignment="Left" Height="45" Margin="642,295,0,0" VerticalAlignment="Top" Width="140" Click="AddStudent_Click"/>
+        <Label Content="First Name" HorizontalAlignment="Left" Height="25" Margin="490,20,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label Content="Second Name" HorizontalAlignment="Left" Height="30" Margin="490,90,0,0" VerticalAlignment="Top" Width="100"/>
+        <TextBox x:Name="SecondNameBox" HorizontalAlignment="Left" Height="25" Margin="490,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="277"/>
+        <TextBox x:Name="BirthDayBox" HorizontalAlignment="Left" Height="25" Margin="490,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="277"/>
+        <Label Content="Birth Day" HorizontalAlignment="Left" Height="30" Margin="490,165,0,0" VerticalAlignment="Top" Width="100"/>
+
+    </Grid>
+</Window>
