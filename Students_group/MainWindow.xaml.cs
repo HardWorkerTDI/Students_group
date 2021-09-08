@@ -27,57 +27,15 @@ namespace Students_group
 	public partial class MainWindow : Window
 	{
 		Sudents_for_VorEntities studentEntities = new Sudents_for_VorEntities();
+
 		public MainWindow()
 		{
 			InitializeComponent();
-			
 		}
 
 		private void AddButt_Click(object sender, RoutedEventArgs e)
 		{
 			
-
-			////объявление переменной
-			//string connectionstring;
-			//SqlConnection cnn;
-			////установка соединения
-			//connectionstring = @"Data Source=DESKTOP-GQ0VNNV\SQLEXPRESS; Initial Catalog=Sudents_for_Vor;User ID=sa; Password=12345";
-			////назначить соединение
-			//cnn = new SqlConnection(connectionstring);
-			////открыть соединение
-			//cnn.Open();
-			
-			////определяем переменные
-			//SqlCommand command;
-			//SqlDataReader dataReader;
-			//String sql, Output = "";
-			////определяем запрос sql
-			//sql = "Select First_name, Second_name, birth_day from Student";
-			////команда sql
-			//command = new SqlCommand(sql, cnn);
-			////объявляем читателя данных
-			//dataReader = command.ExecuteReader();
-
-			//List<string[]> data = new List<string[]>();
-			////получаем таблицу с даннными
-			//while (dataReader.Read())
-			//{
-			//	data.Add(new string[3]);
-
-			//	data[data.Count - 1][0] = dataReader[0].ToString();
-			//	data[data.Count - 1][1] = dataReader[0].ToString();
-			//	data[data.Count - 1][2] = dataReader[0].ToString();
-			//	//Output = Output + dataReader.GetValue(0) + " - " + dataReader.GetValue(1) + " - " + dataReader.GetValue(2) + "\n";
-			//}
-
-			////закрыть соединение
-			//dataReader.Close();
-			//command.Dispose();
-			//cnn.Close();
-
-			//foreach (string[] s in data)
-			//	RecordsDataGrid.Items.Add(s);
-
 		}
 
 		private void AddStudent_Click(object sender, RoutedEventArgs e)
@@ -111,10 +69,17 @@ namespace Students_group
 
 				command.Dispose();
 				cnn.Close();
+
+				//обновление DataGrid после добавления в БД
+				var query = from Student in studentEntities.Student
+							select new { Student.First_name, Student.Second_name, Student.birth_day };
+				RecordsDataGrid.ItemsSource = query.ToList();
+
 				MessageBox.Show("Inserted sucessfully");
 			}
 		}
 
+		//отображение данных в таблице при запуске
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			var query = from Student in studentEntities.Student
