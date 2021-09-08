@@ -8,7 +8,7 @@
         Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
     <Grid>
         <Button x:Name="AddButt" Content="show" HorizontalAlignment="Left" Height="45" Margin="642,364,0,0" VerticalAlignment="Top" Width="140" Click="AddButt_Click"/>
-        <DataGrid Name="RecordsDataGrid" Margin="10,10,0,19" AutoGenerateColumns="True" HorizontalContentAlignment="Stretch" CanUserResizeColumns="False" HorizontalAlignment="Left" Width="290">
+        <DataGrid Name="RecordsDataGrid" Margin="10,10,0,19" AutoGenerateColumns="True" HorizontalContentAlignment="Stretch" CanUserResizeColumns="False" HorizontalAlignment="Left" Width="395">
             
         </DataGrid>
         <TextBox x:Name="NameBox" HorizontalAlignment="Left" Height="25" Margin="490,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="277"/>
