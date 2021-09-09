@@ -122,8 +122,10 @@ namespace Students_group
 
 		#endregion
 
+		#region кнопки
+
 		//удаление
-		private void AddButt_Click(object sender, RoutedEventArgs e)
+		private void DeleteButt_Click(object sender, RoutedEventArgs e)
 		{
 			try
 			{
@@ -156,43 +158,46 @@ namespace Students_group
 
 		private void AddStudent_Click(object sender, RoutedEventArgs e)
 		{
-			if (NameBox.Text == "" || SecondNameBox.Text == "" || BirthDayBox.Text == "")
+			try
 			{
-				MessageBox.Show("Enter the fields", "Error");
+				if (!string.IsNullOrWhiteSpace(NameBox.Text) || !string.IsNullOrWhiteSpace(SecondNameBox.Text) || !string.IsNullOrWhiteSpace(BirthDayBox.Text))
+				{
+					var rows_Fname = dataTable.Select().Where(r => r["First_name"].ToString() == NameBox.Text);
+					var rows_Sname = dataTable.Select().Where(r => r["Second_name"].ToString() == SecondNameBox.Text);
+					var rows_BDay = dataTable.Select().Where(r => r["birth_day"].ToString() == BirthDayBox.Text);
+
+					if (rows_Fname.Count() == 0 || rows_Sname.Count() == 0 || rows_Sname.Count() == 0)
+					{
+						DataRow row_1 = dataTable.NewRow();
+
+						row_1["First_name"] = NameBox.Text;
+						row_1["Second_name"] = SecondNameBox.Text;
+						row_1["birth_day"] = BirthDayBox.Text;
+
+						dataTable.Rows.Add(row_1);
+
+						dataAdapter.Update(dataTable);
+
+						//сортировка визуальной таблицы с данными
+						ICollectionView cvs = CollectionViewSource.GetDefaultView(RecordsDataGrid.ItemsSource);
+						if (cvs != null && cvs.CanSort == true)
+						{
+							cvs.SortDescriptions.Clear();
+							cvs.SortDescriptions.Add(new SortDescription("First_name", ListSortDirection.Ascending));
+						}
+					}
+					else
+						MessageBox.Show("Человек с имеменем \"" + NameBox.Text + "\"" + SecondNameBox + "уже присутствует в базе данных!");
+
+					NameBox.Clear();
+					NameBox.Focus();
+				}
 			}
-				
-			else
+			catch (Exception ex)
 			{
-				////объявление переменной
-				//string connectionstring;
-				//SqlCommand command;
-				//SqlDataAdapter adapter = new SqlDataAdapter();
-				////установка соединения
-				////connectionstring = @"Data Source=DESKTOP-GQ0VNNV\SQLEXPRESS; Initial Catalog=Sudents_for_Vor;User ID=sa; Password=12345";
-				////назначить соединение
-				////SqlConnection cnn = new SqlConnection(connectionstring);
-				////открыть соединение
-				////cnn.Open();
-
-				////определяем запрос sql
-				//string sql = "Insert into Student ( First_name, Second_name, birth_day) values ('" + NameBox.Text + "','" + SecondNameBox.Text + "','" + BirthDayBox.Text + "')";
-
-				////команда sql
-				////command = new SqlCommand(sql, cnn);
-
-				////adapter.InsertCommand = new SqlCommand(sql, cnn);
-				//adapter.InsertCommand.ExecuteNonQuery();
-
-				////command.Dispose();
-				////cnn.Close();
-
-				////обновление DataGrid после добавления в БД
-				//var query = from Student in studentEntities.Student
-				//			select new { Student.First_name, Student.Second_name, Student.birth_day };
-				//RecordsDataGrid.ItemsSource = query.ToList();
-
-				//MessageBox.Show("Inserted sucessfully");
+				MessageBox.Show("Ошибка в функции AddStudent_Click!\n\n" + ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
 			}
 		}
+		#endregion 
 	}
 }

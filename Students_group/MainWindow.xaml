@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="StudentsGroup" Height="450" Width="800" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Button x:Name="AddButt" Content="show" HorizontalAlignment="Left" Height="45" Margin="642,364,0,0" VerticalAlignment="Top" Width="140" Click="AddButt_Click"/>
+        <Button x:Name="DeleteButt" Content="Delete" HorizontalAlignment="Left" Height="45" Margin="642,364,0,0" VerticalAlignment="Top" Width="140" Click="DeleteButt_Click"/>
         <DataGrid Name="RecordsDataGrid" Margin="10,10,0,19" AutoGenerateColumns="False" HorizontalContentAlignment="Stretch" CanUserResizeColumns="False" HorizontalAlignment="Left" Width="395" HeadersVisibility="Column">
             <DataGrid.Columns>
 
