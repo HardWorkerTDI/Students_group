@@ -190,6 +190,8 @@ namespace Students_group
 						MessageBox.Show("Человек с имеменем \"" + NameBox.Text + "\"" + SecondNameBox + "уже присутствует в базе данных!");
 
 					NameBox.Clear();
+					SecondNameBox.Clear();
+					BirthDayBox.Clear();
 					NameBox.Focus();
 				}
 			}
