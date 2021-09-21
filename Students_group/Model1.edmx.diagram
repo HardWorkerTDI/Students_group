@@ -4,8 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="799b863434c1459aa760186e33a9fa5d" Name="Diagram1">
+      <Diagram DiagramId="cecef2cd5c8440f3a102c8daa6522bb7" Name="Diagram1">
         <EntityTypeShape EntityType="Sudents_for_VorModel.Student" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Sudents_for_VorModel.Group" Width="1.5" PointX="0.75" PointY="3.875" />
+        <EntityTypeShape EntityType="Sudents_for_VorModel.Mentor" Width="1.5" PointX="0.75" PointY="6.875" />
+        <EntityTypeShape EntityType="Sudents_for_VorModel.sysdiagrams" Width="1.5" PointX="3.375" PointY="0.75" />
+        <AssociationConnector Association="Sudents_for_VorModel.FK_Group_Mentor" />
+        <AssociationConnector Association="Sudents_for_VorModel.FK_Student_Group" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

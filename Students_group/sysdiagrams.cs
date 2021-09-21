@@ -12,14 +12,12 @@ namespace Students_group
     using System;
     using System.Collections.Generic;
     
-    public partial class Student
+    public partial class sysdiagrams
     {
-        public int ID_student { get; set; }
-        public string First_name { get; set; }
-        public string Second_name { get; set; }
-        public System.DateTime birth_day { get; set; }
-        public Nullable<int> ID_group { get; set; }
-    
-        public virtual Group Group { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

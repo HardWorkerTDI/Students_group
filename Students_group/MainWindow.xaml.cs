@@ -16,6 +16,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Data.Entity.Core.Objects;
+using System.Net;
 
 
 
@@ -74,7 +75,7 @@ namespace Students_group
 				dataAdapter.SelectCommand = new SqlCommand();
 				dataAdapter.SelectCommand.Connection = SqlConnection;
 				dataAdapter.SelectCommand.CommandType = CommandType.Text;
-				dataAdapter.SelectCommand.CommandText = @"SELECT DISTINCT * FROM Student";
+				dataAdapter.SelectCommand.CommandText = @"SELECT DISTINCT First_name, Second_name, birth_day FROM Student";
 
 				//команда вставки записей
 				dataAdapter.InsertCommand = new SqlCommand();
@@ -175,6 +176,7 @@ namespace Students_group
 						row_1["birth_day"] = BirthDayBox.Text;
 
 						dataTable.Rows.Add(row_1);
+						
 
 						dataAdapter.Update(dataTable);
 
@@ -200,6 +202,32 @@ namespace Students_group
 				MessageBox.Show("Ошибка в функции AddStudent_Click!\n\n" + ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
 			}
 		}
-		#endregion 
+
+		private void FindButt_Click(object sender, RoutedEventArgs e)
+		{
+			//var Find = dataTable.Select().Where(f => f["First_name"].ToString() == SearchBox.Text);
+			//(RecordsDataGrid.DataContext as DataTable).DefaultView.RowFilter = SearchBox.Text;
+			//SqlConnection = new SqlConnection();
+			SqlConnection.Open();
+			dataAdapter = new SqlDataAdapter("select * from Student where First_name like '" + SearchBox.Text + "%'", SqlConnection);
+			dataTable = new DataTable();
+			dataAdapter.Fill(dataTable);
+
+			RecordsDataGrid.DataContext = dataTable;
+			SqlConnection.Close();
+		}
+		#endregion
+
+		private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+		{
+			Search();
+		}
+		private void Search()
+		{
+			var FindStudent = Sudents_for_VorEntities.GetContext().Student.ToList(); 
+			FindStudent = FindStudent.Where(s => s.First_name.ToLower().Contains(SearchBox.Text.ToLower())).ToList(); //поиск по имени
+			RecordsDataGrid.ItemsSource = FindStudent;
+		}
+		
 	}
 }

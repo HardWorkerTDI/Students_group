@@ -4,46 +4,165 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище Sudents_for_VorModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "Sudents_for_Vor.dbo.Student" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+    <Schema Namespace="Хранилище Sudents_for_VorModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="ID_group" />
+          </Key>
+          <Property Name="ID_group" Type="int" Nullable="false" />
+          <Property Name="Name_group" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mentor_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Mentor">
+          <Key>
+            <PropertyRef Name="Mentor_ID" />
+          </Key>
+          <Property Name="Mentor_ID" Type="int" Nullable="false" />
+          <Property Name="First_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Second_name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name_group" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Student">
           <Key>
-            <PropertyRef Name="First_name" />
-            <PropertyRef Name="Second_name" />
-            <PropertyRef Name="birth_day" />
+            <PropertyRef Name="ID_student" />
           </Key>
+          <Property Name="ID_student" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_group" Type="int" />
           <Property Name="First_name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Second_name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="birth_day" Type="date" Nullable="false" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Group_Mentor">
+          <End Role="Mentor" Type="Self.Mentor" Multiplicity="1" />
+          <End Role="Group" Type="Self.Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mentor">
+              <PropertyRef Name="Mentor_ID" />
+            </Principal>
+            <Dependent Role="Group">
+              <PropertyRef Name="Mentor_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_Group">
+          <End Role="Group" Type="Self.Group" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="ID_group" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="ID_group" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Хранилище Sudents_for_VorModelContainer">
-          <EntitySet Name="Student" EntityType="Self.Student" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Student].[First_name] AS [First_name], 
-    [Student].[Second_name] AS [Second_name], 
-    [Student].[birth_day] AS [birth_day]
-    FROM [dbo].[Student] AS [Student]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mentor" EntityType="Self.Mentor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Group_Mentor" Association="Self.FK_Group_Mentor">
+            <End Role="Mentor" EntitySet="Mentor" />
+            <End Role="Group" EntitySet="Group" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Group" Association="Self.FK_Student_Group">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Sudents_for_VorModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Student">
           <Key>
-            <PropertyRef Name="First_name" />
-            <PropertyRef Name="Second_name" />
-            <PropertyRef Name="birth_day" />
+            <PropertyRef Name="ID_student" />
           </Key>
+          <Property Name="ID_student" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="First_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Second_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="birth_day" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ID_group" Type="Int32" />
+          <NavigationProperty Name="Group" Relationship="Sudents_for_VorModel.FK_Student_Group" FromRole="Student" ToRole="Group" />
         </EntityType>
         <EntityContainer Name="Sudents_for_VorEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Student" EntityType="Self.Student" />
+          <EntitySet Name="Group" EntityType="Sudents_for_VorModel.Group" />
+          <EntitySet Name="Mentor" EntityType="Sudents_for_VorModel.Mentor" />
+          <EntitySet Name="sysdiagrams" EntityType="Sudents_for_VorModel.sysdiagrams" />
+          <AssociationSet Name="FK_Group_Mentor" Association="Sudents_for_VorModel.FK_Group_Mentor">
+            <End Role="Mentor" EntitySet="Mentor" />
+            <End Role="Group" EntitySet="Group" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Group" Association="Sudents_for_VorModel.FK_Student_Group">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="ID_group" />
+          </Key>
+          <Property Name="ID_group" Type="Int32" Nullable="false" />
+          <Property Name="Name_group" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mentor_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Mentor" Relationship="Sudents_for_VorModel.FK_Group_Mentor" FromRole="Group" ToRole="Mentor" />
+          <NavigationProperty Name="Student" Relationship="Sudents_for_VorModel.FK_Student_Group" FromRole="Group" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Mentor">
+          <Key>
+            <PropertyRef Name="Mentor_ID" />
+          </Key>
+          <Property Name="Mentor_ID" Type="Int32" Nullable="false" />
+          <Property Name="First_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Second_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name_group" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Group" Relationship="Sudents_for_VorModel.FK_Group_Mentor" FromRole="Mentor" ToRole="Group" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Group_Mentor">
+          <End Type="Sudents_for_VorModel.Mentor" Role="Mentor" Multiplicity="1" />
+          <End Type="Sudents_for_VorModel.Group" Role="Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mentor">
+              <PropertyRef Name="Mentor_ID" />
+            </Principal>
+            <Dependent Role="Group">
+              <PropertyRef Name="Mentor_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_Group">
+          <End Type="Sudents_for_VorModel.Group" Role="Group" Multiplicity="0..1" />
+          <End Type="Sudents_for_VorModel.Student" Role="Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="ID_group" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="ID_group" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -53,9 +172,41 @@
           <EntitySetMapping Name="Student">
             <EntityTypeMapping TypeName="Sudents_for_VorModel.Student">
               <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="ID_group" ColumnName="ID_group" />
+                <ScalarProperty Name="ID_student" ColumnName="ID_student" />
                 <ScalarProperty Name="First_name" ColumnName="First_name" />
                 <ScalarProperty Name="Second_name" ColumnName="Second_name" />
                 <ScalarProperty Name="birth_day" ColumnName="birth_day" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Group">
+            <EntityTypeMapping TypeName="Sudents_for_VorModel.Group">
+              <MappingFragment StoreEntitySet="Group">
+                <ScalarProperty Name="Mentor_ID" ColumnName="Mentor_ID" />
+                <ScalarProperty Name="Name_group" ColumnName="Name_group" />
+                <ScalarProperty Name="ID_group" ColumnName="ID_group" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mentor">
+            <EntityTypeMapping TypeName="Sudents_for_VorModel.Mentor">
+              <MappingFragment StoreEntitySet="Mentor">
+                <ScalarProperty Name="Name_group" ColumnName="Name_group" />
+                <ScalarProperty Name="Second_name" ColumnName="Second_name" />
+                <ScalarProperty Name="First_name" ColumnName="First_name" />
+                <ScalarProperty Name="Mentor_ID" ColumnName="Mentor_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Sudents_for_VorModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

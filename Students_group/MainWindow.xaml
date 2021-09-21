@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Students_group"
         mc:Ignorable="d"
-        Title="StudentsGroup" Height="450" Width="800" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+        Title="StudentsGroup" Height="582" Width="800" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Button x:Name="DeleteButt" Content="Delete" HorizontalAlignment="Left" Height="45" Margin="642,364,0,0" VerticalAlignment="Top" Width="140" Click="DeleteButt_Click"/>
+        <Button x:Name="DeleteButt" Content="Delete" HorizontalAlignment="Right" Margin="0,0,10,17" Width="140" Click="DeleteButt_Click" Height="45" VerticalAlignment="Bottom"/>
         <DataGrid Name="RecordsDataGrid" Margin="10,10,0,19" AutoGenerateColumns="False" HorizontalContentAlignment="Stretch" CanUserResizeColumns="False" HorizontalAlignment="Left" Width="395" HeadersVisibility="Column">
             <DataGrid.Columns>
 
@@ -18,13 +18,16 @@
             </DataGrid.Columns>
 
         </DataGrid>
-        <TextBox x:Name="NameBox" HorizontalAlignment="Left" Height="25" Margin="490,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="277"/>
-        <Button x:Name="AddStudent" Content="Add" HorizontalAlignment="Left" Height="45" Margin="642,295,0,0" VerticalAlignment="Top" Width="140" Click="AddStudent_Click"/>
-        <Label Content="First Name" HorizontalAlignment="Left" Height="25" Margin="490,20,0,0" VerticalAlignment="Top" Width="75"/>
-        <Label Content="Second Name" HorizontalAlignment="Left" Height="30" Margin="490,90,0,0" VerticalAlignment="Top" Width="100"/>
-        <TextBox x:Name="SecondNameBox" HorizontalAlignment="Left" Height="25" Margin="490,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="277"/>
-        <TextBox x:Name="BirthDayBox" HorizontalAlignment="Left" Height="25" Margin="490,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="277"/>
-        <Label Content="Birth Day" HorizontalAlignment="Left" Height="30" Margin="490,165,0,0" VerticalAlignment="Top" Width="100"/>
+        <TextBox x:Name="NameBox" HorizontalAlignment="Right" Height="25" Margin="0,0,25,356" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="277"/>
+        <Button x:Name="AddStudent" Content="Add" HorizontalAlignment="Right" Height="45" Margin="0,0,10,86" VerticalAlignment="Bottom" Width="140" Click="AddStudent_Click"/>
+        <Label Content="First Name" HorizontalAlignment="Right" Height="25" Margin="0,0,227,381" VerticalAlignment="Bottom" Width="75"/>
+        <Label Content="Second Name" HorizontalAlignment="Right" Height="30" Margin="0,0,202,306" VerticalAlignment="Bottom" Width="100"/>
+        <TextBox x:Name="SecondNameBox" HorizontalAlignment="Right" Height="25" Margin="0,0,25,281" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="277"/>
+        <TextBox x:Name="BirthDayBox" HorizontalAlignment="Right" Height="25" Margin="0,0,25,206" TextWrapping="Wrap" VerticalAlignment="Bottom" Width="277"/>
+        <Label Content="Birth Day" HorizontalAlignment="Right" Height="30" Margin="0,0,202,231" VerticalAlignment="Bottom" Width="100"/>
+        <TextBox x:Name="SearchBox" HorizontalAlignment="Left" Height="25" Margin="490,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="277" TextChanged="SearchBox_TextChanged"/>
+        <Label Content="Search:" HorizontalAlignment="Left" Height="25" Margin="490,20,0,0" VerticalAlignment="Top" Width="135"/>
+        <Button x:Name="FindButt" Content="Find" HorizontalAlignment="Left" Height="30" Margin="672,80,0,0" VerticalAlignment="Top" Width="95" Click="FindButt_Click"/>
 
     </Grid>
 </Window>
