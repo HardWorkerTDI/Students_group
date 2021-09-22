@@ -205,9 +205,6 @@ namespace Students_group
 
 		private void FindButt_Click(object sender, RoutedEventArgs e)
 		{
-			//var Find = dataTable.Select().Where(f => f["First_name"].ToString() == SearchBox.Text);
-			//(RecordsDataGrid.DataContext as DataTable).DefaultView.RowFilter = SearchBox.Text;
-			//SqlConnection = new SqlConnection();
 			SqlConnection.Open();
 			dataAdapter = new SqlDataAdapter("select * from Student where First_name like '" + SearchBox.Text + "%'", SqlConnection);
 			dataTable = new DataTable();
@@ -224,9 +221,13 @@ namespace Students_group
 		}
 		private void Search()
 		{
-			var FindStudent = Sudents_for_VorEntities.GetContext().Student.ToList(); 
-			FindStudent = FindStudent.Where(s => s.First_name.ToLower().Contains(SearchBox.Text.ToLower())).ToList(); //поиск по имени
-			RecordsDataGrid.ItemsSource = FindStudent;
+			var FindFname = Sudents_for_VorEntities.GetContext().Student.ToList();
+			FindFname = FindFname.Where(s => s.First_name.ToLower().Contains(SearchBox.Text.ToLower())).ToList(); //поиск по имени
+			RecordsDataGrid.ItemsSource = FindFname;
+
+			var FindSecname = Sudents_for_VorEntities.GetContext().Student.ToList();
+			FindSecname = FindSecname.Where(s => s.Second_name.ToLower().Contains(SearchBox.Text.ToLower())).ToList(); //поиск по фамилии
+			RecordsDataGrid.ItemsSource = FindSecname;
 		}
 		
 	}

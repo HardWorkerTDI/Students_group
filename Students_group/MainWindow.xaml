@@ -27,7 +27,6 @@
         <Label Content="Birth Day" HorizontalAlignment="Right" Height="30" Margin="0,0,202,231" VerticalAlignment="Bottom" Width="100"/>
         <TextBox x:Name="SearchBox" HorizontalAlignment="Left" Height="25" Margin="490,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="277" TextChanged="SearchBox_TextChanged"/>
         <Label Content="Search:" HorizontalAlignment="Left" Height="25" Margin="490,20,0,0" VerticalAlignment="Top" Width="135"/>
-        <Button x:Name="FindButt" Content="Find" HorizontalAlignment="Left" Height="30" Margin="672,80,0,0" VerticalAlignment="Top" Width="95" Click="FindButt_Click"/>
 
     </Grid>
 </Window>
